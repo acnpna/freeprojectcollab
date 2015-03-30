@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" 
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+        <h2>Proyectos en ejecución</h2>
+        <h:form id="frmAbmDeProy">
+        <h:dataTable id="tblListaProyectos"   value="#{proyectoController.listaProyecto}" var="pro"
+    			styleClass="order-table"                        
+    			headerClass="order-table-header"
+    			rowClasses="order-table-odd-row,order-table-even-row"
+                        
+    		>
+                      
+    			<h:column>
+    				<f:facet name="header">Proyecto</f:facet>
+                                <h:commandLink value="#{pro.descripcion}" action="#{proyectoController.editar}">
+                                    <f:setPropertyActionListener target="#{proyectoController.proyecto}" value="#{pro}" />
+                                  
+                                </h:commandLink> 
+    			</h:column>
+ 
+    			<h:column>
+    				<f:facet name="header">Horas Presupuestadas</f:facet>
+    				#{pro.horasPresupuestadas} 
+    			</h:column>
+            
+                        <h:column>
+                           <f:facet name="header">Ciente </f:facet>
+                               #{pro.cliente.nombre}
+                       </h:column>
+            
+                         <h:column>
+                        <f:facet name="header">Acciones</f:facet>
+                        <h:commandLink value="borrar" action="#{proyectoController.borrar()}" >
+                             <f:setPropertyActionListener target="#{proyectoController.proyecto}" value="#{pro}" />                
+                            <f:ajax execute="@this" render="@form" />
+                        </h:commandLink>
+                        </h:column>
+            
+    		</h:dataTable>
+    <div>
+        <h:commandButton value="Nuevo" action="#{proyectoController.nuevo()}">            
+        </h:commandButton>
+        <h:commandButton value="Borrar Todos" action="#{proyectoController.borrarTodos()}">            
+        </h:commandButton>
+    </div>
+            
+    </h:form>
+
+
+</ui:composition>

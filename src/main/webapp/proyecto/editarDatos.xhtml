@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" 
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                 xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+        <h2>Datos del Proyecto</h2>
+        <h:form id="frmAdmPr">
+            <h:panelGrid columns="2" id="panelDatosProyecto">
+                 <h:outputText value="Descripción"></h:outputText>
+                <h:inputText id="txtDescripcion" value="#{proyectoController.proyecto.descripcion}" disabled="#{empty proyectoController.proyecto}"></h:inputText>
+                <h:outputText value="Horas Presupuestadas"></h:outputText>
+                <h:inputText id="txtDireccion" value="#{proyectoController.proyecto.horasPresupuestadas}"  disabled="#{empty proyectoController.proyecto}"></h:inputText>
+                
+                <h:outputText value="Cliente "></h:outputText>
+            <h:selectOneMenu id="cliente" value="#{proyectoController.clienteSeleccionado}" >
+                <f:selectItems value="#{clienteCtrl.listaCliente}" var="unCliente" itemLabel="#{unCliente.nombre}"  itemValue="#{unCliente.id}"  />
+                
+            </h:selectOneMenu>
+                
+                <h:commandButton value="Guardar" action="#{proyectoController.guardar()}" />
+                <h:commandButton value="Cancelar" action="#{proyectoController.cancelar()}" />                
+            </h:panelGrid>    
+        </h:form>
+</ui:composition>
